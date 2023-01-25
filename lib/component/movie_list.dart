@@ -28,6 +28,23 @@ class _MovieListState extends State<MovieList> {
     super.initState();
   }
 
+  Future search(text) async {
+    movies = await helper.findMovies(text);
+    setState(() {
+      moviesCount = movies.length;
+      movies = movies;
+    });
+  }
+
+  Future initialize() async {
+    movies = [];
+    movies = await helper.getUpcoming();
+    setState(() {
+      moviesCount = movies.length;
+      movies = movies;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     NetworkImage image;
@@ -87,22 +104,5 @@ class _MovieListState extends State<MovieList> {
                         '${'Released: ' + movies[position].releaseDate} - Vote: ${movies[position].voteAverage}'),
                   ));
             }));
-  }
-
-  Future search(text) async {
-    movies = await helper.findMovies(text);
-    setState(() {
-      moviesCount = movies.length;
-      movies = movies;
-    });
-  }
-
-  Future initialize() async {
-    movies = [];
-    movies = await helper.getUpcoming();
-    setState(() {
-      moviesCount = movies.length;
-      movies = movies;
-    });
   }
 }
