@@ -22,6 +22,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MovieList();
+    return const MovieList();
   }
 }
