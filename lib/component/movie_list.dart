@@ -61,6 +61,7 @@ class _MovieListState extends State<MovieList> {
                     onSubmitted: (String text) {
                       search(text);
                     },
+                    decoration: const InputDecoration(hintText: 'Ketik Kata Pencarian'),
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20.0,
