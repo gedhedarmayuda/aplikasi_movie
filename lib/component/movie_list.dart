@@ -61,7 +61,8 @@ class _MovieListState extends State<MovieList> {
                     onSubmitted: (String text) {
                       search(text);
                     },
-                    decoration: const InputDecoration(hintText: 'Ketik Kata Pencarian'),
+                    decoration:
+                        const InputDecoration(hintText: 'Ketik Kata Pencarian'),
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20.0,
@@ -70,7 +71,7 @@ class _MovieListState extends State<MovieList> {
                 } else {
                   setState(() {
                     visibleIcon = const Icon(Icons.search);
-                    searchBar = const Text('Movies');
+                    searchBar = const Text('Daftar Film');
                   });
                 }
               });
