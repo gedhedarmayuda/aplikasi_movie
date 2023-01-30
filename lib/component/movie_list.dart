@@ -45,18 +45,6 @@ class _MovieListState extends State<MovieList> {
     });
   }
 
-  Future defaultList() async {
-    moviesCount = 0;
-    movies = [];
-    helper = HttpHelper();
-    List moviesFromAPI = [];
-    moviesFromAPI = await helper.getUpcoming();
-    setState(() {
-      movies = moviesFromAPI;
-      moviesCount = movies.length;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     NetworkImage image;
