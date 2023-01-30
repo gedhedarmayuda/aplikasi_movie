@@ -45,6 +45,18 @@ class _MovieListState extends State<MovieList> {
     });
   }
 
+  Future defaultList() async {
+    moviesCount = 0;
+    movies = [];
+    helper = HttpHelper();
+    List moviesFromAPI = [];
+    moviesFromAPI = await helper.getUpcoming();
+    setState(() {
+      movies = moviesFromAPI;
+      moviesCount = movies.length;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     NetworkImage image;
@@ -95,19 +107,23 @@ class _MovieListState extends State<MovieList> {
               ListTile(
                 title: const Text('Cari'),
                 onTap: (() {
-                  visibleIcon = const Icon(Icons.cancel);
-                  searchBar = TextField(
-                    autofocus: true,
-                    onSubmitted: (String text) {
-                      search(text);
-                    },
-                    decoration: const InputDecoration(hintText: 'Ketik kata pencarian'),
-                    textInputAction: TextInputAction.search,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                    ),
-                  );
+                  Navigator.pop(context);
+                  setState(() {
+                    visibleIcon = const Icon(Icons.cancel);
+                    searchBar = TextField(
+                      autofocus: true,
+                      onSubmitted: (String text) {
+                        search(text);
+                      },
+                      decoration: const InputDecoration(
+                          hintText: 'Ketik kata pencarian'),
+                      textInputAction: TextInputAction.search,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                      ),
+                    );
+                  });
                 }),
               )
             ],
