@@ -78,6 +78,41 @@ class _MovieListState extends State<MovieList> {
             },
           ),
         ]),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              ListTile(
+                title: const Text('Upcoming'),
+                onTap: (() {
+                  Navigator.pop(context);
+                  setState(() {
+                    visibleIcon = const Icon(Icons.search);
+                    searchBar = const Text('Daftar Film');
+                  });
+                  initialize();
+                }),
+              ),
+              ListTile(
+                title: const Text('Cari'),
+                onTap: (() {
+                  visibleIcon = const Icon(Icons.cancel);
+                  searchBar = TextField(
+                    autofocus: true,
+                    onSubmitted: (String text) {
+                      search(text);
+                    },
+                    decoration: const InputDecoration(hintText: 'Ketik kata pencarian'),
+                    textInputAction: TextInputAction.search,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                    ),
+                  );
+                }),
+              )
+            ],
+          ),
+        ),
         body: ListView.builder(
             // ignore: unnecessary_null_comparison
             itemCount: (moviesCount == null) ? 0 : moviesCount,
