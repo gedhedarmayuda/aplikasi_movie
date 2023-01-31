@@ -11,9 +11,9 @@ class MovieList extends StatefulWidget {
 }
 
 class _MovieListState extends State<MovieList> {
-  String result = 'value';
+  late String result;
   late HttpHelper helper;
-  int moviesCount = 0;
+  late int moviesCount;
   late List movies;
   final String iconBase = 'https://image.tmdb.org/t/p/w92/';
   final String defaultImage =
@@ -37,11 +37,26 @@ class _MovieListState extends State<MovieList> {
   }
 
   Future initialize() async {
+    moviesCount = 0;
     movies = [];
-    movies = await helper.getUpcoming();
+    helper = HttpHelper();
+    List moviesFromAPI = [];
+    moviesFromAPI = await helper.getUpcoming();
     setState(() {
+      movies = moviesFromAPI;
       moviesCount = movies.length;
-      movies = movies;
+    });
+  }
+
+  Future topMovieList() async {
+    moviesCount = 0;
+    movies = [];
+    helper = HttpHelper();
+    List moviesFromAPI = [];
+    moviesFromAPI = await helper.topRated();
+    setState(() {
+      movies = moviesFromAPI;
+      moviesCount = movies.length;
     });
   }
 
@@ -113,6 +128,17 @@ class _MovieListState extends State<MovieList> {
                     );
                   });
                 }),
+              ),
+              ListTile(
+                title: const Text('Top Rate'),
+                onTap: () {
+                  Navigator.pop(context);
+                  setState(() {
+                    visibleIcon = const Icon(Icons.search);
+                    searchBar = const Text("Daftar Film Rating Tinggi");
+                  });
+                  topMovieList();
+                },
               )
             ],
           ),

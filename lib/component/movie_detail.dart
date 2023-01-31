@@ -32,6 +32,35 @@ class MovieDetail extends StatelessWidget {
             Container(
               padding: const EdgeInsets.only(left: 16, right: 16),
               child: Text(movie.overview),
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(movie.voteAverage.toString()),
+                  ),
+                  const Expanded(
+                    child: Spacer(),
+                  ),
+                  Expanded(
+                    child: Text(movie.releaseDate),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Row(
+                children: const <Widget>[
+                  Expanded(
+                    child: Spacer(),
+                  ),
+                  Expanded(
+                      child: Text("Create by Gede Darma Yuda, NIM: 20201067")),
+                  Expanded(child: Spacer()),
+                ],
+              ),
             )
           ],
         ))));
